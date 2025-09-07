@@ -1,11 +1,122 @@
 # Django JWT Authentication (with Cookies)
 
-A RESTful authentication API built with Django REST Framework and SimpleJWT, using **HTTP-only cookies** for secure session management.
+A RESTful authentication API built with Django REST Framework and SimpleJWT, using HTTP-only cookies for secure session management.
 
-## 🚀 Features
+## Features
 - User registration
 - Login with JWT tokens stored in cookies
 - Token refresh using refresh token from cookies
 - Logout (clears cookies)
 - Authenticated route example
-- Custom cookie-based authentication
+- Custom cookie-based authentication class
+
+## Endpoints
+
+### Authentication
+POST api/auth/token/
+Login user and return access + refresh tokens in cookies.
+
+Request body:
+{
+  "username": "your_username",
+  "password": "your_password"
+}
+
+Response:
+{
+  "success": true
+}
+
+---
+
+POST api/auth/refresh-token/
+Generate a new access token using the refresh_token from cookies.
+
+Response:
+{
+  "refreshed": true
+}
+
+---
+
+### User Management
+POST api/auth/register/
+Register a new user.
+
+Request body:
+{
+  "username": "new_user",
+  "email": "user@example.com",
+  "password": "password123"
+}
+
+Response:
+{
+  "id": 1,
+  "username": "new_user",
+  "email": "user@example.com"
+}
+
+---
+
+POST api/auth/logout/
+Logout user and clear cookies.
+
+Response:
+{
+  "success": true
+}
+
+---
+
+### Authentication Check
+POST api/auth/authenticated/
+Protected endpoint. Requires valid access token (cookie).
+
+Response (if authenticated):
+{
+  "authenticated": true
+}
+
+---
+
+## Custom Authentication
+
+This project includes a custom authentication class that validates the JWT directly from cookies:
+
+class CookiesJwtAuthentication(JWTAuthentication):
+    def authenticate(self, request):
+        access_token = request.COOKIES.get('access_token')
+        ...
+
+This makes Django REST Framework automatically use the JWT from cookies instead of requiring Authorization headers.
+
+---
+
+## Installation & Setup
+
+git clone https://github.com/Gabriel-Hernandess/Django-JWT-Authentication.git
+cd Django-JWT-Authentication
+
+# Create virtual env
+python -m venv venv
+source venv/bin/activate  # Linux/Mac
+venv\Scripts\activate     # Windows
+
+# Install dependencies
+pip install -r requirements.txt
+
+# Run migrations
+python manage.py migrate
+
+# Start server
+python manage.py runserver
+
+---
+
+## Security Notes
+- Tokens are stored in HttpOnly Secure Cookies (cannot be accessed via JavaScript).
+- SameSite=None allows cross-site requests (needed for frontend apps hosted on different domains).
+- Always use HTTPS in production.
+
+---
