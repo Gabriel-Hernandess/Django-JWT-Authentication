@@ -1,0 +1,11 @@
+# Django JWT Authentication (with Cookies)
+
+A RESTful authentication API built with Django REST Framework and SimpleJWT, using **HTTP-only cookies** for secure session management.
+
+## 🚀 Features
+- User registration
+- Login with JWT tokens stored in cookies
+- Token refresh using refresh token from cookies
+- Logout (clears cookies)
+- Authenticated route example
+- Custom cookie-based authentication
