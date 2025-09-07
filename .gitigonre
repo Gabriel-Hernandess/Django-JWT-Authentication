@@ -1,0 +1,62 @@
+# Arquivos e pastas do Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+.eggs/
+
+# Ambiente virtual
+.env
+.venv
+venv/
+ENV/
+env/
+env.bak/
+
+# Arquivos de configuração locais
+*.sqlite3
+*.db
+db.sqlite3
+local_settings.py
+
+# Arquivos Django
+*.log
+*.pot
+*.pyc
+*.mo
+*.py.class
+
+# Diretórios de migração compilados
+*/migrations/__pycache__/
+*/migrations/*.py[cod]
+
+# Static e media (gerados automaticamente)
+staticfiles/
+static/
+media/
+
+# Arquivos do VSCode/PyCharm
+.vscode/
+.idea/
+
+# Arquivos do sistema
+.DS_Store
+Thumbs.db
+
+# Arquivos de coverage/testes
+.coverage
+*.cover
+*.py,cover
+htmlcov/
+.tox/
+.nox/
+.cache/
+pytest_cache/
+
+# Arquivos de Docker
+*.pid
